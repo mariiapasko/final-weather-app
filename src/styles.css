@@ -1,6 +1,7 @@
 h1 {
   color: #08274e;
   padding-top: 10px;
+  margin-left: 20px;
 }
 
 h2 {
@@ -42,7 +43,7 @@ small:first-letter {
   border: 3px solid #5e93b1;
   border-radius: 10px;
   padding-top: 10px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
 }
 .indicators {
   border: 2px solid #5e93b1;
@@ -59,7 +60,7 @@ small:first-letter {
 }
 
 .day {
-  font-size: 10px;
+  font-size: 16px;
   border: 2px solid #5e93b1;
   margin-left: 17px;
   border-radius: 10px;
@@ -69,6 +70,14 @@ small:first-letter {
 }
 .row.g-3 {
   margin-left: 20px;
+}
+.temperature-day {
+  font-size: 14px;
+}
+
+.temperature-night {
+  font-size: 14px;
+  opacity: 0.5;
 }
 
 #temperature {

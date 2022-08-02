@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    
+    <script
+      src="https://kit.fontawesome.com/2191692fcc.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+    <title>Weatherapp</title>
+  </head>
+  <body>
+    <div class="container" >
+    <h1 id="city"></h1>  
+               <div class="row g-3">
+              <div class="col-9">
+               <form id="search-form"  class="mb-3" >
+                <input type="text" class="form-control" id="city-input" placeholder="Enter a city" autocomplete="off"
+              autofocus="on"/>
+              </div>
+              <div class="col-3">
+                <input type="submit" value = "Search" class="btn btn-primary mb-3">
+							</div>
+					  </div>
+          
+          </form>
+              <div class="col-9">
+              <ul>
+                <li>Today is <span id="today-date"> June 27, 18:27 </span></li>
+                <small><li id="description"></li></small>
+            </div>
+          <div class="row indicators">
+              <div class="col-6 weather-temperature">  
+              <img src="src/sunshine.png" alt="Clear" id="icon"/>
+              <strong id="temperature"> 28 </strong>
+              <span class ="units">
+                <a href="#" id="celsius-link" class="active">°C</a>
+                 | 
+                <a href="#" id="fahrenheit-link">°F</a>
+              </span>
+              </div>
+        <div class="col-6" id="weather-details">
+          <ul>
+            <li>Feels like: <span id="feelslike"></span>°C</li>
+            <li>Wind: <span id="wind"></span> km/h </li>
+            <li>Humidity: <span id="humidity"></span> % </li>
+            
+          <ul>
+            </div>
+            </div>
+          </div>
+          </div>
+          </div>
+    <footer>
+        <a
+          href="https://github.com/mariiapasko/final-weather-app"
+          target="_blank" id="textLink">
+          Open-source code
+        </a> by Mariia Pasko
+      </footer>
+      <script src="src/index.js"></script>
+  </body>
+</html>

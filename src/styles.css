@@ -38,7 +38,7 @@ small:first-letter {
     rgb(137, 210, 253) 0%,
     rgb(255, 241, 188) 90%
   );
-  max-width: 700px;
+  max-width: 600px;
   border: 3px solid #5e93b1;
   border-radius: 10px;
   padding-top: 10px;
@@ -57,6 +57,20 @@ small:first-letter {
 .weather-temperature .active:hover {
   text-decoration: none;
 }
+
+.day {
+  font-size: 10px;
+  border: 2px solid #5e93b1;
+  margin-left: 17px;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.row.g-3 {
+  margin-left: 20px;
+}
+
 #temperature {
   text-align: center;
   font-size: 30px;

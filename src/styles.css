@@ -19,9 +19,6 @@ li {
   margin: 0;
   padding: 0;
 }
-img {
-  width: 80px;
-}
 
 footer {
   text-align: center;
@@ -59,10 +56,10 @@ small:first-letter {
   text-decoration: none;
 }
 
-.day {
+.weather-day {
   font-size: 16px;
   border: 2px solid #5e93b1;
-  margin-left: 17px;
+  margin-left: 10px;
   border-radius: 10px;
   text-align: center;
   padding-top: 5px;
@@ -83,4 +80,8 @@ small:first-letter {
 #temperature {
   text-align: center;
   font-size: 30px;
+}
+
+#icon {
+  width: 80px;
 }

@@ -1,44 +1,97 @@
-let date = new Date();
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let months = [
-  "Jan",
-  "Feb",
-  "March",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let months = [
+    "Jan",
+    "Feb",
+    "March",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-let currentDay = days[date.getDay()];
-let currentHours = date.getHours();
-if (currentHours < 10) {
-  currentHours = `0${currentHours}`;
+  let currentDay = days[date.getDay()];
+  let currentHours = date.getHours();
+  if (currentHours < 10) {
+    currentHours = `0${currentHours}`;
+  }
+  let currentMonth = months[date.getMonth()];
+  let currentDate = date.getDate();
+
+  let currentMinutes = date.getMinutes();
+  if (currentMinutes < 10) {
+    currentMinutes = `0${currentMinutes}`;
+  }
+  let today = document.querySelector("#today-date");
+  today.innerHTML = `${currentDay}, ${currentMonth} ${currentDate}, ${currentHours}:${currentMinutes}`;
 }
-let currentMonth = months[date.getMonth()];
-let currentDate = date.getDate();
 
-let currentMinutes = date.getMinutes();
-if (currentMinutes < 10) {
-  currentMinutes = `0${currentMinutes}`;
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
 }
-let today = document.querySelector("#today-date");
-today.innerHTML = `${currentDay}, ${currentMonth} ${currentDate}, ${currentHours}:${currentMinutes}`;
 
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+        <div class="weather-day">${formatDay(forecastDay.dt)}
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="45"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="temperature-day"> ${Math.round(
+            forecastDay.temp.max
+          )}° </span>
+          <span class="temperature-night"> ${Math.round(
+            forecastDay.temp.min
+          )}° </span>
+        </div></div>
+      </div>
+  `;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "56fa3862eefe40643c942987acf7273a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -61,6 +114,8 @@ function displayTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function search(city) {
@@ -90,7 +145,6 @@ function displayCelsiusTemperature(event) {
   fahrenheitLink.classList.remove("active");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
-
 let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");

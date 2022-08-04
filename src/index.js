@@ -1,15 +1,13 @@
 function formatDate(timestamp) {
   let date = new Date(timestamp);
-
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
   let months = [
     "Jan",
     "Feb",
@@ -24,21 +22,17 @@ function formatDate(timestamp) {
     "Nov",
     "Dec",
   ];
-
-  let currentDay = days[date.getDay()];
-  let currentHours = date.getHours();
-  if (currentHours < 10) {
-    currentHours = `0${currentHours}`;
-  }
-  let currentMonth = months[date.getMonth()];
-  let currentDate = date.getDate();
-
-  let currentMinutes = date.getMinutes();
-  if (currentMinutes < 10) {
-    currentMinutes = `0${currentMinutes}`;
-  }
-  let today = document.querySelector("#today-date");
-  today.innerHTML = `${currentDay}, ${currentMonth} ${currentDate}, ${currentHours}:${currentMinutes}`;
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  return `Last updated: ${day} ${hours}:${minutes}`;
 }
 
 function formatDay(timestamp) {
@@ -70,10 +64,10 @@ function displayForecast(response) {
           width="45"
         />
         <div class="weather-forecast-temperatures">
-          <span class="temperature-day"> ${Math.round(
+          <span class="temperature-max"> ${Math.round(
             forecastDay.temp.max
           )}° </span>
-          <span class="temperature-night"> ${Math.round(
+          <span class="temperature-min"> ${Math.round(
             forecastDay.temp.min
           )}° </span>
         </div></div>
@@ -95,6 +89,7 @@ function getForecast(coordinates) {
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
+  let dateElement = document.querySelector("#date");
   let descriptionElement = document.querySelector("#description");
   let feelslikeElement = document.querySelector("#feelslike");
   let windElement = document.querySelector("#wind");
@@ -105,6 +100,7 @@ function displayTemperature(response) {
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
   descriptionElement.innerHTML = response.data.weather[0].description;
   feelslikeElement.innerHTML = Math.round(response.data.main.feels_like);
   windElement.innerHTML = Math.round(response.data.wind.speed);

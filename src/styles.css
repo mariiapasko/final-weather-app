@@ -59,7 +59,7 @@ small:first-letter {
 .weather-day {
   font-size: 16px;
   border: 2px solid #5e93b1;
-  margin-left: 10px;
+  margin-left: 5px;
   border-radius: 10px;
   text-align: center;
   padding-top: 5px;
@@ -68,11 +68,11 @@ small:first-letter {
 .row.g-3 {
   margin-left: 20px;
 }
-.temperature-day {
+.temperature-max {
   font-size: 14px;
 }
 
-.temperature-night {
+.temperature-min {
   font-size: 14px;
   opacity: 0.5;
 }
